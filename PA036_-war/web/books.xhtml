@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+
+
+    <body>
+        
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">     
+            <ui:define name="title">Výpis knih</ui:define>
+            <ui:define name="content">
+                <h:form styleClass="form">
+                    <h:outputLabel value="Hledej podle autora" for="searchByAuthor"/>
+                    <h:inputText id="searchByAuthor" value="#{books.authorNameToSearch}" >
+                        <f:validateLength minimum="2" maximum="50"/>
+                    </h:inputText>
+                    <h:commandButton type="submit" value="Hledej" action="#{books.searchByAuthor()}" />
+                </h:form>
+                <br/>
+
+                <h:form styleClass="form">
+                    <h:outputLabel value="Hledej podle názvu" for="searchByTitle"/>
+                    <h:inputText id="searchByTitle" value="#{books.titleToSearch}" >
+                        <f:validateLength minimum="2" maximum="50"/>
+                    </h:inputText>
+                    <h:commandButton type="submit" value="Hledej" action="#{books.searchByTitle()}" />
+                </h:form>
+                <br/>
+
+                <h:dataTable value="#{books.getBooks()}" var="value" first="#{books.firstBookDisplayed}" rows="10" >
+                    <h:column>
+                        
+                        
+                            <h:panelGroup rendered="#{empty value.getImage()}" style="width: 100px">
+                                <img  src="images/books/noimage.jpg" width="100px"/>
+                            </h:panelGroup>
+                        
+                            <h:panelGroup rendered="#{not empty value.getImage()}" style="width: 100px">
+                                <img  src="#{value.getImage()}" width="100px"/>
+                            </h:panelGroup>
+
+                            
+                  
+                    </h:column>
+                    <h:column>  
+                        <h1><h:outputText value="Název : #{value.getTitle()}"/></h1> 
+                        <h:form styleClass="form">
+                            <h:outputText value="Autoři"/> <br/>
+
+                            <ui:repeat value="#{books.getAuthors(value.getIdBook())}" var="author">
+
+                                <h:commandLink value="#{author.getName()} #{author.getSurname()}" action="#{books.selectAuthor(author)}"/> <br/>
+                            </ui:repeat>
+                        </h:form>
+                        <br/>      
+
+                    </h:column>
+                    <h:column>
+                        <h:form styleClass="form">
+                            <h:commandLink value="Detail" action="#{detailedBook.selectDetailedBook(value.getIdBook())}" />
+                        </h:form>
+
+                    </h:column>
+                    <h:column>
+                        <h:form styleClass="addToCart">
+                          <h:commandLink value="Přidat do košíku" action="#{user.addBookToCart(value.getIdBook())}" rendered="#{user.userIsLogIn() == true}"/>
+                        </h:form>
+
+                    </h:column>
+                </h:dataTable>  
+                <div style="margin-bottom:0" >
+                    <center>
+                    <h:form styleClass="form" >
+                        <c:if test="#{books.firstBookDisplayed > 0}" >
+                            <h1>  <h:commandLink value="&lt; Předešlé " action="#{books.previous()}"/> </h1>
+                        </c:if>
+                        <c:if test="#{books.books.size() > books.firstBookDisplayed +10}" >
+                           <h1> <h:commandLink value="  Další &gt;" action="#{books.next()}" /></h1>
+                        </c:if>
+                    </h:form>
+                        </center>
+                    <h:outputText value="Zobrazené knihy #{books.firstBookDisplayed+1} až #{books.firstBookDisplayed +10} z nájdených #{books.books.size()} "/> <br/>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

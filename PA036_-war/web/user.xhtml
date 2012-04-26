@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <body>
+         
+
+    <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+        <ui:define name="title">Nastavení</ui:define>
+              
+      <ui:define name="content">
+        <div class="content_box">
+				<h1>Nastavení</h1>
+        <h2>Osobní údaje</h2>
+        <h:form styleClass="form">
+          <p><h:outputLabel value="Login"/><h:outputText id="login" value="#{user.login}" /> 
+          </p>
+        <p>
+           <h:outputLabel value="Jméno" for="name"/>
+           <h:inputText id="name" value="#{user.name}" >
+                           <f:validateLength minimum="2" maximum="50"/>
+           </h:inputText>
+        </p>
+        <p><h:commandButton type="submit" value="Ulož" action="#{user.updateUser()}" /></p>
+        </h:form>
+        
+        <h2>Nastavení hesla</h2>
+        <h:form styleClass="form">
+        <h3>Nové heslo</h3>
+        <p><h:outputLabel value="Heslo" for="password"/>
+          <h:inputSecret value="#{user.password}" id="password">
+            </h:inputSecret></p>
+        <p><h:outputLabel value="Zopakovat heslo" for="password2"/><h:inputSecret value="#{user.password2}" id="password2"/></p>
+				<p><h:commandButton type="submit" value="Ulož" action="#{user.updatePassword()}" /></p>
+
+				</h:form>
+
+				</div>                                
+      </ui:define>
+
+    </ui:composition>
+	</body>
+</html>

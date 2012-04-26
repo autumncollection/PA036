@@ -1,1 +1,11 @@
 nbproject
+/PA036_-ejb/dist/
+/PA036_-ejb/build/
+/PA036_-war/build/
+/PA036_-war/dist/
+/build/
+/dist/
+/PA036_-war/web/resources/.svn/
+/PA036_-war/web/resources/css/.svn/
+/PA036_-war/web/resources/ezcomp/.svn/
+/PA036_-war/web/WEB-INF/.svn/
