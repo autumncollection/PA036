@@ -37,4 +37,18 @@
         <validator-id>user.isEmail</validator-id>
         <validator-class>validator.UserValidator</validator-class>
     </validator>
+    <navigation-rule>
+        <from-view-id>//home/tom/NetBeansProjects/PA036_ (copy)/PA036_-war/web/addGenre.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>//home/tom/NetBeansProjects/PA036_ (copy)/PA036_-war/web/genres.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>//home/tom/NetBeansProjects/PA036_ (copy)/PA036_-war/web/editGenre.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>'ok'</from-outcome>
+            <to-view-id>//home/tom/NetBeansProjects/PA036_ (copy)/PA036_-war/web/genres.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

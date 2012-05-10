@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <head>
+        <title>Informace o kapele</title>
+    </head>
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">            
+
+<ui:define name="content">
+  <div class="content_box">    
+    <ui:param name="bid" value="#{bid}"/>
+  <div style="border-top: 1px solid #333;"> </div>
+  <h2><h:outputText value="Název : #{recordBean.record.recordname}"/></h2> 
+  <p>
+  <h3>Vydáno: <h:outputText value="#{recordBean.record.produced}"/></h3>
+  <h4>Popis</h4>
+  <h:outputText value="#{recordBean.record.recorddescription}" />
+  </p>
+  <h2>Na albu spolupracovali</h2>
+  <h:dataTable value="#{recordBean.record.recordbandsCollection}" var="value">
+    <h:column>
+      <h:outputText value="#{value.bandid.bandname}" />
+    </h:column>
+  </h:dataTable>
+  </div>   
+  <h2>Skladby</h2>
+  <h:dataTable value="#{recordBean.tracks()}" var="values">
+      <h:column>
+        <h:outputText value="#{values.trackname}" />
+      </h:column>
+    <h:column>
+      <h:form>
+        <h:commandLink value="delete" action="#{recordBean.deleteTrack(values)}" />
+      </h:form>
+    </h:column>   
+  </h:dataTable>
+  <c:if test="#{user.userIsLogIn()}">
+  <h2>Track detail</h2>
+  <h:form class="form">
+    <label>Track</label>
+    <h:inputText value="#{recordBean.track.trackname}" />
+    <h:commandButton action="#{recordBean.addTrack}" />
+  </h:form>    
+</c:if>         
+</ui:define>
+
+
+        </ui:composition>
+    </body>
+</html>

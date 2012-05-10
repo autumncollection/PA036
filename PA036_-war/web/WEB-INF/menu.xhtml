@@ -8,14 +8,17 @@
     <div id="templatemo_menu">
         <ul>
             <li><a href="home.xhtml" target="_parent">Úvodní strana</a></li>
-            <li><a href="information.xhtml" target="_parent">Katalog</a></li>
+            <li><a href="bands.xhtml" target="_parent">Katalog kapel</a></li>
+            <li><a href="albums.xhtml" target="_parent">Katalog desek</a></li>
             <li><a href="information.xhtml" target="_parent">Kontakt</a></li>
             <li><a href="information.xhtml" target="_parent">Administrace</a></li>
-            <c:if test="#{user.userIsLogIn()}">              
-                <li><a href="addBook.xhtml" target="_parent">Přidávání kapel</a></li>   
-                <li><a href="addBook.xhtml" target="_parent">Přidávání nahrávek</a></li>                   
+            <c:if test="#{user.userIsLogIn()}">
+                <li><a href="addBand.xhtml" target="_parent">Přidávání kapel</a></li>
+                <li><a href="addRecord.xhtml" target="_parent">Přidávání nahrávek</a></li>
+                <li><a href="addGenre.xhtml" target="_parent">Přidávání žánrů</a></li>
+                <li><a href="addMusician.xhtml" target="_parent">Přidávání muzikantů</a></li>
             </c:if>
 
-        </ul>    	
+        </ul>
     </div>
 </html>

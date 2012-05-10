@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <head>
+    <title>Editace žánrů</title>
+    </head>
+    <body>
+        <ui:composition template="./WEB-INF/templateLayout.xhtml">
+          <ui:define name="content">
+            <div class="content_box">
+              <h:form class="form">
+                <h:outputLabel value="Name : "/>
+                <h:inputText value="#{band.band.bandname}"/>
+               
+                <h:outputLabel value="Description : "/>
+                <h:inputTextarea value="#{band.band.banddescription}" />
+                <h:outputLabel value="Genre: " />
+                <h:selectManyCheckbox value="#{band.genresList}">
+                  <f:selectItems value="#{genre.allGenres()}" var="value"  itemValue="#{value.id}" itemLabel="#{value.genrename}"/>
+                </h:selectManyCheckbox>
+                
+                <label>Hudebník</label>
+                <h:selectManyListbox value="#{band.musicianList}">
+                  <f:selectItems value="#{musicianBean.findAllMusician()}" var="value" itemValue="#{value.id}" itemLabel="#{value.musicianname}"/>  
+                </h:selectManyListbox>
+                
+               <h:commandButton value="Edituj" action="#{band.updateBand()}"/>
+              </h:form>
+            </div>
+          </ui:define>
+        </ui:composition>     
+    </body>
+</html>
+

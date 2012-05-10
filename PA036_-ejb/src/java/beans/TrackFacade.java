@@ -4,10 +4,13 @@
  */
 package beans;
 
+import entities.Record;
 import entities.Track;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,4 +30,16 @@ public class TrackFacade extends AbstractFacade<Track> {
         super(Track.class);
     }
     
+    public void insert(Record record, Track track)
+    {
+      track.setRecordid(record);
+      em.persist(track);
+    }
+    
+    public Collection<Track> get(Record record)
+    {
+      Query q = em.createNamedQuery("Track.find");
+      q.setParameter("id", record);
+      return q.getResultList();
+    }
 }

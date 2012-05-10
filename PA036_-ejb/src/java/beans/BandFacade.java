@@ -15,16 +15,16 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class BandFacade extends AbstractFacade<Band> {
-    @PersistenceContext(unitName = "PA036_-ejbPU")
-    private EntityManager em;
+  @PersistenceContext(unitName = "PA036_-ejbPU")
+  private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+  @Override
+  protected EntityManager getEntityManager() {
+    return em;
+  }
 
-    public BandFacade() {
-        super(Band.class);
-    }
-    
+  public BandFacade() {
+    super(Band.class);
+  }
+  
 }

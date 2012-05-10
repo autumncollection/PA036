@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 import javax.validation.ValidationException;

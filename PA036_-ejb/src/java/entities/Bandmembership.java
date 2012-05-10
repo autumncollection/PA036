@@ -19,108 +19,108 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "BANDMEMBERSHIP")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Bandmembership.findAll", query = "SELECT b FROM Bandmembership b"),
-    @NamedQuery(name = "Bandmembership.findByBandid", query = "SELECT b FROM Bandmembership b WHERE b.bandid = :bandid"),
-    @NamedQuery(name = "Bandmembership.findBySince", query = "SELECT b FROM Bandmembership b WHERE b.since = :since"),
-    @NamedQuery(name = "Bandmembership.findByEnd", query = "SELECT b FROM Bandmembership b WHERE b.end = :end")})
+  @NamedQuery(name = "Bandmembership.findAll", query = "SELECT b FROM Bandmembership b"),
+  @NamedQuery(name = "Bandmusicians.remove", query= "DELETE FROM Bandmembership b WHERE b.bandid = :id"),
+  @NamedQuery(name = "Bandmembership.findByBandid", query = "SELECT b FROM Bandmembership b WHERE b.bandid = :bandid"),
+  @NamedQuery(name = "Bandmembership.findBySince", query = "SELECT b FROM Bandmembership b WHERE b.since = :since"),
+  @NamedQuery(name = "Bandmembership.findByEnd", query = "SELECT b FROM Bandmembership b WHERE b.end = :end")})
 public class Bandmembership implements Serializable {
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "SINCE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date since;
-    @Column(name = "END")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date end;
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "BANDID")
-    private BigDecimal bandid;
-    @JoinColumn(name = "MUSICIANID", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Musician musicianid;
-    @JoinColumn(name = "BANDID", referencedColumnName = "ID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private Band band;
+  private static final long serialVersionUID = 1L;
+  // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+  @Id
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "BANDID")
+  private BigDecimal bandid;
+  @Basic(optional = false)
+  @Column(name = "SINCE")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date since;
+  @Column(name = "END")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date end;
+  @JoinColumn(name = "MUSICIANID", referencedColumnName = "ID")
+  @ManyToOne(optional = false)
+  private Musician musicianid;
+  @JoinColumn(name = "BANDID", referencedColumnName = "ID", insertable = false, updatable = false)
+  @OneToOne(optional = false)
+  private Band band;
 
-    public Bandmembership() {
-    }
+  public Bandmembership() {
+  }
 
-    public Bandmembership(BigDecimal bandid) {
-        this.bandid = bandid;
-    }
+  public Bandmembership(BigDecimal bandid) {
+    this.bandid = bandid;
+  }
 
-    public Bandmembership(BigDecimal bandid, Date since) {
-        this.bandid = bandid;
-        this.since = since;
-    }
+  public Bandmembership(BigDecimal bandid, Date since) {
+    this.bandid = bandid;
+    this.since = since;
+  }
 
-    public BigDecimal getBandid() {
-        return bandid;
-    }
+  public BigDecimal getBandid() {
+    return bandid;
+  }
 
-    public void setBandid(BigDecimal bandid) {
-        this.bandid = bandid;
-    }
+  public void setBandid(BigDecimal bandid) {
+    this.bandid = bandid;
+  }
 
-    public Musician getMusicianid() {
-        return musicianid;
-    }
+  public Date getSince() {
+    return since;
+  }
 
-    public void setMusicianid(Musician musicianid) {
-        this.musicianid = musicianid;
-    }
+  public void setSince(Date since) {
+    this.since = since;
+  }
 
-    public Band getBand() {
-        return band;
-    }
+  public Date getEnd() {
+    return end;
+  }
 
-    public void setBand(Band band) {
-        this.band = band;
-    }
+  public void setEnd(Date end) {
+    this.end = end;
+  }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (bandid != null ? bandid.hashCode() : 0);
-        return hash;
-    }
+  public Musician getMusicianid() {
+    return musicianid;
+  }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bandmembership)) {
-            return false;
-        }
-        Bandmembership other = (Bandmembership) object;
-        if ((this.bandid == null && other.bandid != null) || (this.bandid != null && !this.bandid.equals(other.bandid))) {
-            return false;
-        }
-        return true;
-    }
+  public void setMusicianid(Musician musicianid) {
+    this.musicianid = musicianid;
+  }
 
-    @Override
-    public String toString() {
-        return "entity.Bandmembership[ bandid=" + bandid + " ]";
-    }
+  public Band getBand() {
+    return band;
+  }
 
-    public Date getSince() {
-        return since;
-    }
+  public void setBand(Band band) {
+    this.band = band;
+  }
 
-    public void setSince(Date since) {
-        this.since = since;
-    }
+  @Override
+  public int hashCode() {
+    int hash = 0;
+    hash += (bandid != null ? bandid.hashCode() : 0);
+    return hash;
+  }
 
-    public Date getEnd() {
-        return end;
+  @Override
+  public boolean equals(Object object) {
+    // TODO: Warning - this method won't work in the case the id fields are not set
+    if (!(object instanceof Bandmembership)) {
+      return false;
     }
+    Bandmembership other = (Bandmembership) object;
+    if ((this.bandid == null && other.bandid != null) || (this.bandid != null && !this.bandid.equals(other.bandid))) {
+      return false;
+    }
+    return true;
+  }
 
-    public void setEnd(Date end) {
-        this.end = end;
-    }
-    
+  @Override
+  public String toString() {
+    return "entities.Bandmembership[ bandid=" + bandid + " ]";
+  }
+  
 }

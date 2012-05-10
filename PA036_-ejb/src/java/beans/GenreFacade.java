@@ -15,16 +15,43 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class GenreFacade extends AbstractFacade<Genre> {
-    @PersistenceContext(unitName = "PA036_-ejbPU")
-    private EntityManager em;
+  @PersistenceContext(unitName = "PA036_-ejbPU")
+  private EntityManager em;
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+  @Override
+  protected EntityManager getEntityManager() {
+    return em;
+  }
+
+  public GenreFacade() {
+    super(Genre.class);
+  }
+  
+  public String saveGenre(String genreName, String genreDescription)
+  {
+      Genre g = new Genre();
+      g.setGenrename(genreName);
+      g.setGenredescription(genreDescription);
+      em.persist(g);
+      return "ok";
+  }
+
+  public String updateGenre(int id, String genreName, String genreDescription)
+  {
+
+    Genre genre = em.find(Genre.class, toBigDecimal(id));
+    if(!genre.getGenrename().equals(genreName))
+    {
+      genre.setGenrename(genreName);
+
+    }
+    if(!genre.getGenredescription().equals(genreDescription))
+    {
+      genre.setGenredescription(genreDescription);
     }
 
-    public GenreFacade() {
-        super(Genre.class);
-    }
-    
+    em.persist(genre);
+    return "ok";
+  }
+
 }

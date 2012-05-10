@@ -1,9 +1,17 @@
 package beans;
 
+import beans.AdministratorFacade;
+import beans.Message;
 import entities.Administrator;
+import java.io.IOException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 
 /** 
  * User.java
@@ -74,6 +82,7 @@ public class User {
      * @return String Specification of web page designed to interpret result.
      */
     public String isLogin() {
+         System.err.print(this.login);
         if (this.login.length() > 0) {
            
             Message m = new Message();
